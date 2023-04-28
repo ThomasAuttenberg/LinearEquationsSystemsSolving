@@ -12,21 +12,25 @@
 int main()
 {
 
-    int n = 3;
+    int n = 4;
 
+    // double Matrix[3][3] = { {6.25,-1,0.5},{-1,5,2.12},{0.5,2.12,3.6} };
    
-    double Matrix[3][3] = { {6.25,-1,0.5},{-1,5,2.12},{0.5,2.12,3.6} };
-    double** Matrix_ = new double* [3];
-    for (int i = 0; i < 3; i++) {
-        Matrix_[i] = new double[3];
-        for (int j = 0; j < 3; j++) {
+    double Matrix[4][4] = { {99,14,-15,23},{16,128,-22, 29},{18,20,-167,32}, {10,12,-16,100} };
+   //double Matrix[4][4] = { {20,2,3,7},{1,12,-2, -5},{5,-3,13,0}, {0,0,-1,15} };
+    double** Matrix_ = new double*[n];
+    for (int i = 0; i < n; i++) {
+        Matrix_[i] = new double[n];
+        for (int j = 0; j < n; j++) {
             Matrix_[i][j] = Matrix[i][j];
         }
     }
 
-    double addition[3] = { 7.5,-8.68,-0.24 };
-    double* addition_ = new double[3];
-    for (int i = 0; i < 3; i++) {
+    // double addition[3] = { 7.5,-8.68,-0.24 };
+    double addition[4] = { 5,8,9,4 }; //для метод
+    //double addition[4] = { 5,4,-3,7 };
+    double* addition_ = new double[n];
+    for (int i = 0; i < n; i++) {
         addition_[i] = addition[i];
     }
     
@@ -53,7 +57,7 @@ int main()
     std::cout << "\n\n";
     std::cout << "Iterations method: " << "\n";
     start_time = std::chrono::steady_clock::now();
-    double* meowkaMurka = SqMatrixCalculator::IterationsMethod(Matrix_, addition, n, 0.00000001);
+    double* meowkaMurka = SqMatrixCalculator::IterationsMethod(Matrix_, addition, n, 0.0000001);
     end_time = std::chrono::steady_clock::now();
     for (int i = 0; i < n; i++) {
         std::cout << meowkaMurka[i] << " ";

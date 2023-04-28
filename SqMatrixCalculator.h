@@ -20,20 +20,28 @@ public:
 
 		MRow xi = new MElement[size]; // storage for x_i;
 		for (int i = 0; i < size; i++) xi[i] = 0;
-
+		MRow prev_xi = new MElement[size];
 		MRow deltaxi = new MElement[size]; //storage for accuracy
 		int iterations = 0;
+		for (int i = 0; i < size; i++) {
+			deltaxi[i] = DBL_MAX;
+			prev_xi[i] = 0;
+		}
+	
 		while (1) {
 			iterations++;
 			for (int i = 0; i < size; i++) {
-				deltaxi[i] = xi[i];
 				xi[i] = additions[i];
 				for (int j = 0; j < size; j++) {
 					if (j == i) continue;
-					xi[i] -= matrix[i][j] * xi[j];
+					xi[i] -= (matrix[i][j] * prev_xi[j]);
 				}
-				xi[i] /= matrix[i][i];
-				deltaxi[i] = abs(deltaxi[i] - xi[i]);
+				xi[i] = xi[i] / matrix[i][i];
+				deltaxi[i] = abs(prev_xi[i] - xi[i]);
+			}
+
+			for (int i = 0; i < size; i++) {
+				prev_xi[i] = xi[i];
 			}
 
 			MElement max_delta = DBL_MIN;
